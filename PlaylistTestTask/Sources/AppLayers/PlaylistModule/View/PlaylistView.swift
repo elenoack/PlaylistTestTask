@@ -24,15 +24,14 @@ final class PlaylistView: UIView {
         tableView.register(PlaylistCell.self)
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorColor = .gray
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action:
+                                        #selector(handleRefresh),
+                                     for: UIControl.Event.valueChanged)
+        tableView.tintColor = UIColor.systemGray2
         return tableView
     }().setupAutoLayout()
-    
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = UIColor.systemGray2
-        return refreshControl
-    }()
-    
+
     lazy var titleTextField = TitleTextField(with: Constants.Strings.title).setupAutoLayout()
     
     // MARK: - Action
@@ -63,11 +62,7 @@ extension PlaylistView {
     private func setupView() {
         titleTextField.setLeftIcon(UIImage(systemName: "pencil"))
         backgroundColor = .systemBackground
-        tableView.insertSubview(refreshControl, at: 0)
         titleTextField.isHidden = true
-        refreshControl.addTarget(self, action:
-                                    #selector(handleRefresh),
-                                 for: UIControl.Event.valueChanged)
     }
     
     private func setupHierarchy() {

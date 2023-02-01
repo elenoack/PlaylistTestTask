@@ -75,7 +75,7 @@ extension PlaylistViewController: UISearchControllerDelegate, UITableViewDelegat
     
     private func handleCompletion() {
         playlistView?.refreshCompletion = { [weak self] in
-            self?.playlistView?.refreshControl.endRefreshing()
+            self?.playlistView?.tableView.refreshControl?.endRefreshing()
             self?.viewModel.getDefaulConfigureCell()
         }
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))

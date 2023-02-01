@@ -53,7 +53,7 @@
 		04C49C312989C34800DE3B62 /* PlaylistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
 		04C49C342989C39600DE3B62 /* PlaylistCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCellViewModel.swift; sourceTree = "<group>"; };
 		04C49C362989C3AD00DE3B62 /* PlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewModel.swift; sourceTree = "<group>"; };
-		04C49C3A2989C3EA00DE3B62 /* ImageLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
+		04C49C3A2989C3EA00DE3B62 /* ImageLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		04C49C3E2989C41200DE3B62 /* PlayListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayListDTO.swift; sourceTree = "<group>"; };
 		04C49C412989C43100DE3B62 /* DefaultNetworkClien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkClien.swift; sourceTree = "<group>"; };
 		04C49C432989C44B00DE3B62 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
