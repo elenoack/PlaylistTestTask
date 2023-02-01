@@ -147,8 +147,7 @@
 				04C49C332989C38600DE3B62 /* ViewModel */,
 				04C49C2D2989C2E700DE3B62 /* View */,
 			);
-			name = PlaylistModule;
-			path = ../PlaylistModule;
+			path = PlaylistModule;
 			sourceTree = "<group>";
 		};
 		04C49C2A2989C2C600DE3B62 /* PlaylistMainDTO */ = {
