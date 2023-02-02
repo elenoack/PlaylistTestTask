@@ -8,6 +8,8 @@
 import UIKit
 
 final class TitleTextField: UITextField {
+
+    // MARK: - Init
     init(with title: String) {
         super.init(frame: .zero)
 

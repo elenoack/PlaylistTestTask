@@ -1,5 +1,5 @@
 //
-//  Extensions+Alert.swift
+//  Alert+Extensions.swift
 //  PlaylistTestTask
 //
 //  Created by Elena Noack on 01.02.23.

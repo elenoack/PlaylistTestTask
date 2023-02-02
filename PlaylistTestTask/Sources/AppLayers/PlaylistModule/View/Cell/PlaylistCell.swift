@@ -7,12 +7,6 @@
 
 import UIKit
 
-fileprivate enum Metrics {
-    static let albumImageRadius: CGFloat = 8
-    static let insets: CGFloat = 18
-    static let albumImageSize: CGFloat = 100
-}
-
 final class PlaylistCell: UITableViewCell {
 
     // MARK: - Properties
@@ -35,7 +29,7 @@ final class PlaylistCell: UITableViewCell {
     
     private lazy var albumImage: UIImageView = {
         let image = UIImageView()
-        image.layer.cornerRadius = Metrics.albumImageRadius
+        image.layer.cornerRadius = Constants.Size.cellAlbumImageRadius
         image.clipsToBounds = true
         image.backgroundColor = .systemGray6
         image.contentMode = .scaleAspectFill
@@ -61,9 +55,10 @@ final class PlaylistCell: UITableViewCell {
         stackView.title.text = nil
         stackView.subtitle.text = nil
     }
+    
 }
 
-// MARK: - Private methods
+// MARK: - Settings
 extension PlaylistCell {
     
     private func setupHierarchy() {
@@ -74,9 +69,12 @@ extension PlaylistCell {
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            albumImage.topAnchor.constraint(equalTo: topAnchor, constant: Metrics.insets),
-            albumImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.insets),
-            albumImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Metrics.insets),
+            albumImage.topAnchor.constraint(equalTo: topAnchor,
+                                            constant: Constants.Size.cellInsets),
+            albumImage.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                constant: Constants.Size.cellInsets),
+            albumImage.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                               constant: -Constants.Size.cellInsets),
             albumImage.widthAnchor.constraint(equalTo: albumImage.heightAnchor),
             
             activityIndicatorView.centerXAnchor.constraint(equalTo: albumImage.centerXAnchor),
@@ -84,9 +82,9 @@ extension PlaylistCell {
             
             stackView.centerYAnchor.constraint(equalTo: albumImage.centerYAnchor),
             stackView.leadingAnchor.constraint(equalTo: albumImage.trailingAnchor,
-                                               constant: Metrics.insets),
+                                               constant: Constants.Size.cellInsets),
             stackView.rightAnchor.constraint(equalTo: rightAnchor,
-                                             constant: -Metrics.insets)
+                                             constant: -Constants.Size.cellInsets)
         ])
     }
     

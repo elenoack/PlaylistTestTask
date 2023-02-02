@@ -22,12 +22,14 @@ enum Constants {
     enum Fonts {
         static let title = UIFont.systemFont(ofSize: 20, weight: .regular)
         static let subtitle = UIFont.systemFont(ofSize: 18, weight: .regular)
-
     }
 
     enum Size {
         static let titleTextFieldHeight: CGFloat = 44
         static let tableViewHeight: CGFloat = 140
+        static let cellAlbumImageRadius: CGFloat = 8
+        static let cellInsets: CGFloat = 18
+        static let cellAlbumImageSize: CGFloat = 100
     }
 
 }

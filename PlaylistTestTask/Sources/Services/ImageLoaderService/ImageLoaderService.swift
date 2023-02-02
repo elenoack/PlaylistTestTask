@@ -8,14 +8,17 @@
 import UIKit
 
 actor ImageLoaderService: Actor {
-    
+
+    // MARK: - Properties
     private var cache = NSCache<NSURL, UIImage>()
     private let urlSession: URLSession = .shared
-    
+
+    // MARK: - Init
     init(cacheCountLimit: Int) {
         cache.countLimit = cacheCountLimit
     }
-    
+
+    // MARK: - Methods
     func loadImage(for url: URL) async throws -> UIImage {
         if let image = lookUpCache(for: url) {
             return image
@@ -24,7 +27,8 @@ actor ImageLoaderService: Actor {
         updateCache(image: image, and: url)
         return lookUpCache(for: url) ?? image
     }
-    
+
+    // MARK: - Private
     private func doLoadImage(for url: URL) async throws -> UIImage {
         let urlRequest = URLRequest(url: url)
         let (data, response) = try await urlSession.data(for: urlRequest)
@@ -45,22 +49,6 @@ actor ImageLoaderService: Actor {
     private func updateCache(image: UIImage, and url: URL) {
         if cache.object(forKey: url as NSURL) == nil {
             cache.setObject(image, forKey: url as NSURL)
-        }
-    }
-    
-}
-
-extension UIImageView {
-    
-    private var imageLoader: ImageLoaderService { ImageLoaderService(cacheCountLimit: 100) }
-    
-    @MainActor
-    func setImage(with stringURL: String) async throws {
-        if let url = URL(string: stringURL) {
-            let image = try await imageLoader.loadImage(for: url)
-            if !Task.isCancelled {
-                self.image = image
-            }
         }
     }
     

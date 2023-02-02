@@ -13,6 +13,7 @@ protocol NetworkClient {
 
 final class DefaultNetworkClient: NetworkClient {
     
+    // MARK: - Properties
     private let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         return decoder
@@ -20,10 +21,12 @@ final class DefaultNetworkClient: NetworkClient {
     
     private let urlSession: URLSession
     
+    // MARK: - Init
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
     }
     
+    // MARK: - Methods
     func perform<T: Decodable>(request: URLRequest) async throws -> T {
         let (data, response) = try await urlSession.data(for: request)
         

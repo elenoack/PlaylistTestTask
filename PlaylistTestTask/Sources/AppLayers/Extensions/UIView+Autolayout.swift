@@ -7,11 +7,7 @@
 
 import UIKit
 
-protocol AutoLayoutPrepareable {
-    func setupAutoLayout() -> Self
-}
-
-extension UIView: AutoLayoutPrepareable {
+extension UIView {
     func setupAutoLayout() -> Self {
         translatesAutoresizingMaskIntoConstraints = false
         return self

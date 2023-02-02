@@ -44,6 +44,7 @@ final class PlaylistViewController: UIViewController {
         super.viewDidDisappear(animated)
         unsubscribeFromKeyboard()
     }
+
 }
 
 // MARK: - Settings
@@ -54,6 +55,7 @@ extension PlaylistViewController: UISearchControllerDelegate, UITableViewDelegat
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
         navigationItem.title = Constants.Strings.navigationControllerTitle
+        navigationController?.hideKeyboardWhenTappedAround()
     }
     
     private func configureView() {
@@ -81,6 +83,7 @@ extension PlaylistViewController: UISearchControllerDelegate, UITableViewDelegat
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
         playlistView?.tableView.addGestureRecognizer(longPress)
     }
+
 }
 
 // MARK: - UITableViewDataSource
@@ -123,11 +126,7 @@ extension PlaylistViewController: UISearchResultsUpdating, UISearchBarDelegate {
             viewModel.updateAlbums(request: .init(predicate: text))
         }
     }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.getDefaulConfigureCell()
-    }
-    
+
 }
 
 // MARK: - UITextFieldDelegate
@@ -203,6 +202,7 @@ extension PlaylistViewController {
             }
         }
     }
+    
 }
 
 // MARK: - Observing

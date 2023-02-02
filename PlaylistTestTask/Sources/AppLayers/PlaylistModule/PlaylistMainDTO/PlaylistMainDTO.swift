@@ -10,6 +10,7 @@ import Foundation
 enum PlaylistMainDTO {
     
     enum GetPlaylist {
+
         struct Request {
             let predicate: String
         }

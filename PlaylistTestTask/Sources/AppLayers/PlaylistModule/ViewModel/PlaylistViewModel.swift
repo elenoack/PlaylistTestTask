@@ -34,7 +34,6 @@ final class PlaylistViewModel {
     }
     
     // MARK: - Methods
-    
     func updateAlbums(request: PlaylistMainDTO.GetPlaylist.Request) {
         var viewModels = [PlaylistCellViewModel]()
         let filtedAlbums = albums.filter { album in
