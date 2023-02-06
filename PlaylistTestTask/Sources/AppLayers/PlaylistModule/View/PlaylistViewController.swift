@@ -17,10 +17,8 @@ final class PlaylistViewController: UIViewController {
         return view as? PlaylistView
     }
     
-    private lazy var viewModel = {
-        PlaylistViewModel()
-    }()
-    
+    private let viewModel = PlaylistViewModel()
+
     private var index: Int?
     
     // MARK: - View Life Cycle
@@ -209,8 +207,7 @@ extension PlaylistViewController {
 extension PlaylistViewController {
     
     private func initViewModel() {
-        viewModel.updateDate = { [weak self] in
-            guard let self else { return }
+        viewModel.updateDate = { [unowned self] in
             Task {
                 await MainActor.run {
                     self.playlistView?.tableView.reloadData()
@@ -218,9 +215,12 @@ extension PlaylistViewController {
             }
         }
         
-        viewModel.failData = { [weak self] in
-            guard let self else { return }
-            self.showError()
+        viewModel.failData = { [unowned self] in
+            Task {
+                await MainActor.run {
+                    self.showError()
+                }
+            }
         }
     }
     

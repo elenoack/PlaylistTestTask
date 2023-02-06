@@ -7,11 +7,7 @@
 
 import Foundation
 
-protocol NetworkClient {
-    func perform<T: Decodable>(request: URLRequest) async throws -> T
-}
-
-final class DefaultNetworkClient: NetworkClient {
+final class DefaultNetworkClient {
     
     // MARK: - Properties
     private let decoder: JSONDecoder = {

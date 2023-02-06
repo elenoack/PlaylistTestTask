@@ -22,12 +22,11 @@ extension UITableView {
     func register(_ cellClass: UITableViewCell.Type) {
         register(cellClass, forCellReuseIdentifier: cellClass.reuseIdentifier)
     }
-    
+
     func dequeueReusableCell<T: UITableViewCell>(
-        for indexPath: IndexPath
-    ) -> T {
+        for indexPath: IndexPath) -> T {
         return dequeueReusableCell(withIdentifier: T.reuseIdentifier,
                                    for: indexPath) as? T ?? T()
     }
-    
+
 }

@@ -25,7 +25,7 @@ final class PlaylistViewModel {
     var updateDate: (() -> Void)?
     var failData: (() -> Void)?
     
-    private let networkClient: NetworkClient = DefaultNetworkClient()
+    private let networkClient = DefaultNetworkClient()
     private var albums = [Album]()
     
     // MARK: - Init
@@ -35,20 +35,17 @@ final class PlaylistViewModel {
     
     // MARK: - Methods
     func updateAlbums(request: PlaylistMainDTO.GetPlaylist.Request) {
-        var viewModels = [PlaylistCellViewModel]()
         let filtedAlbums = albums.filter { album in
             album.title.lowercased().contains(
                 request.predicate.lowercased()) || album.subtitle.lowercased().contains(request.predicate.lowercased())
         }
-        filtedAlbums.forEach { viewModels.append(createCellModel(album: .init(request: $0))) }
-        playlistCellViewModel = viewModels
+        let viewModels: [PlaylistCellViewModel] = filtedAlbums.map {
+            return createCellModel(album: .init(request: $0)) }
     }
     
     func getDefaulConfigureCell() {
-        var viewModels = [PlaylistCellViewModel]()
-        for album in albums {
-            viewModels.append(createCellModel(album: .init(request: album)))
-        }
+        let viewModels: [PlaylistCellViewModel] = albums.map {
+            return createCellModel(album: .init(request: $0)) }
         playlistCellViewModel = viewModels
     }
     
@@ -68,13 +65,11 @@ extension PlaylistViewModel {
     private func fetchData() {
         Task {
             do {
-                var viewModels = [PlaylistCellViewModel]()
                 let request = PlaylistRequestFactory.playlist.urlReques
                 let data: PlayListDTO = try await networkClient.perform(request: request)
                 albums = data.albums
-                for album in albums {
-                    viewModels.append(createCellModel(album: .init(request: album)))
-                }
+                let viewModels: [PlaylistCellViewModel] = albums.map {
+                    return createCellModel(album: .init(request: $0)) }
                 playlistCellViewModel = viewModels
             } catch {
                 localizedError = error as? NetworkError ?? .unknown
