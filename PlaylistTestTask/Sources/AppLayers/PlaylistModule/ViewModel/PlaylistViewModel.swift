@@ -28,18 +28,28 @@ final class PlaylistViewModel {
     private let networkClient = DefaultNetworkClient()
     private var albums = [Album]()
     
-    // MARK: - Init
-    init() {
-        fetchData()
-    }
-    
     // MARK: - Methods
+    func fetchData() {
+        Task {
+            do {
+                let request = PlaylistRequestFactory.playlist.urlReques
+                let data: PlayListDTO = try await networkClient.perform(request: request)
+                albums = data.albums
+                let viewModels: [PlaylistCellViewModel] = albums.map {
+                    return createCellModel(album: .init(request: $0)) }
+                playlistCellViewModel = viewModels
+            } catch {
+                localizedError = error as? NetworkError ?? .unknown
+            }
+        }
+    }
+
     func updateAlbums(request: PlaylistMainDTO.GetPlaylist.Request) {
         let filtedAlbums = albums.filter { album in
             album.title.lowercased().contains(
                 request.predicate.lowercased()) || album.subtitle.lowercased().contains(request.predicate.lowercased())
         }
-        let viewModels: [PlaylistCellViewModel] = filtedAlbums.map {
+        let _: [PlaylistCellViewModel] = filtedAlbums.map {
             return createCellModel(album: .init(request: $0)) }
     }
     
@@ -61,22 +71,7 @@ final class PlaylistViewModel {
 
 // MARK: - Private
 extension PlaylistViewModel {
-    
-    private func fetchData() {
-        Task {
-            do {
-                let request = PlaylistRequestFactory.playlist.urlReques
-                let data: PlayListDTO = try await networkClient.perform(request: request)
-                albums = data.albums
-                let viewModels: [PlaylistCellViewModel] = albums.map {
-                    return createCellModel(album: .init(request: $0)) }
-                playlistCellViewModel = viewModels
-            } catch {
-                localizedError = error as? NetworkError ?? .unknown
-            }
-        }
-    }
-    
+
     private func createCellModel(album: PlaylistMainDTO.GetPlaylist.ViewModel) -> PlaylistCellViewModel {
         return PlaylistCellViewModel(
             title: album.request.title,

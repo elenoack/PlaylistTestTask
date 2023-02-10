@@ -58,6 +58,7 @@ extension PlaylistViewController: UISearchControllerDelegate, UITableViewDelegat
     
     private func configureView() {
         hideKeyboardWhenTappedAround()
+        viewModel.fetchData()
         playlistView?.tableView.delegate = self
         playlistView?.tableView.dataSource = self
         playlistView?.titleTextField.delegate = self
